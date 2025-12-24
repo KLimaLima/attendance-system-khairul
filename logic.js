@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getDatabase, ref, push, set, remove, query, orderByChild, startAt, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔴 PASTE CONFIG HERE
 const firebaseConfig = {
             apiKey: "AIzaSyC9CqjVBCcmjeYAZdX3grW213s2jyMHpAw",
             authDomain: "g40attendance.firebaseapp.com",
@@ -223,3 +222,4 @@ if(simBtn) {
         });
     });
 }
+
