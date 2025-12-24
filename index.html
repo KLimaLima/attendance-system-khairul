@@ -18,36 +18,16 @@
 
     <div id="dashboardScreen">
         
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h1>🏫 Lecture Hall Management</h1>
-            <button id="logoutBtn" style="width:auto; background:#dc3545;">Log Out</button>
+        <div class="header">
+            <h1>🏫 Attendance Monitor</h1>
+            <div class="header-controls">
+                <a href="booking.html" class="nav-btn">📅 Manage Schedule</a>
+                <button id="logoutBtn">Log Out</button>
+            </div>
         </div>
 
         <div class="container">
             
-            <div class="card">
-                <h2>📅 Admin: Booking Panel</h2>
-                <label>Select Day</label>
-                <select id="bookDay">
-                    <option value="1">Monday</option>
-                    <option value="2">Tuesday</option>
-                    <option value="3">Wednesday</option>
-                    <option value="4">Thursday</option>
-                    <option value="5">Friday</option>
-                    <option value="6">Saturday</option>
-                    <option value="0">Sunday</option>
-                </select>
-                <div style="display:flex; gap:10px;">
-                    <div style="flex:1"><label>Start</label><select id="bookTime"></select></div>
-                    <div style="flex:1"><label>Duration</label><input type="number" id="bookDuration" value="2" min="1" max="4"></div>
-                </div>
-                <label>Subject</label>
-                <input type="text" id="bookName" placeholder="e.g. Circuit Design">
-                <button id="addClassBtn" style="background:#6610f2; color:white;">➕ Book Slot</button>
-                <hr>
-                <div id="bookingList">Loading...</div>
-            </div>
-
             <div class="card">
                 <h2>📊 Attendance Monitor</h2>
                 <div class="date-control">
