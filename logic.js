@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getDatabase, ref, push, set, remove, query, orderByChild, startAt, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, reauthenticateWithCredential, EmailAuthProvider, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔴 PASTE YOUR FIREBASE CONFIG HERE
+// 🔴 PASTE CONFIG HERE
 const firebaseConfig = {
             apiKey: "AIzaSyC9CqjVBCcmjeYAZdX3grW213s2jyMHpAw",
             authDomain: "g40attendance.firebaseapp.com",
@@ -20,7 +20,7 @@ const auth = getAuth(app);
 let currentClassData = [];
 let currentClassName = "";
 
-// 1. LOGIN & SECURITY
+// 1. LOGIN
 document.getElementById('loginBtn').addEventListener('click', () => {
     const email = document.getElementById('emailInput').value;
     const pass = document.getElementById('passwordInput').value;
@@ -34,17 +34,19 @@ document.getElementById('logoutBtn').addEventListener('click', () => signOut(aut
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
+        // SECURITY CHECK (Updated to your manual backdoor or DB check)
         const whitelistRef = ref(db, `authorized_users/${user.uid}`);
         const snapshot = await get(whitelistRef);
 
-        if (snapshot.exists() || user.email === "admin@test.com") { 
+        // NOTE: I kept the backdoor for your email here just in case!
+        if (snapshot.exists() || user.email === "mtdanial@student.usm.my") { 
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('dashboardScreen').style.display = 'block';
             document.getElementById('historyDate').valueAsDate = new Date();
             loadAdminPanel();
             loadScheduleForSelectedDate();
         } else {
-            alert("🚫 Access Denied: Not authorized.");
+            alert("🚫 Access Denied.");
             signOut(auth);
         }
     } else {
@@ -53,7 +55,31 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// 2. USER MANAGEMENT
+// 2. SETTINGS MODAL & USER MANAGEMENT
+const modal = document.getElementById('settingsModal');
+
+// Open Modal
+document.getElementById('settingsBtn').addEventListener('click', () => {
+    modal.style.display = 'flex';
+    // Reset the lock state every time you open it for security
+    document.getElementById('unlockPanel').style.display = 'block';
+    document.getElementById('accessPanel').style.display = 'none';
+    document.getElementById('reauthPassword').value = "";
+});
+
+// Close Modal
+document.getElementById('closeSettings').addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Close if clicked outside box
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Unlock Logic
 document.getElementById('unlockBtn').addEventListener('click', () => {
     const user = auth.currentUser;
     const pass = document.getElementById('reauthPassword').value;
@@ -63,9 +89,10 @@ document.getElementById('unlockBtn').addEventListener('click', () => {
         document.getElementById('unlockPanel').style.display = 'none';
         document.getElementById('accessPanel').style.display = 'block';
         loadUserList();
-    }).catch(() => alert("❌ Incorrect Password."));
+    }).catch(() => alert("❌ Incorrect Password"));
 });
 
+// Add User
 document.getElementById('addAdminBtn').addEventListener('click', () => {
     const newEmail = document.getElementById('newAdminEmail').value;
     const newPass = document.getElementById('newAdminPass').value;
@@ -100,7 +127,7 @@ function loadUserList() {
     });
 }
 
-// 3. ADMIN BOOKING
+// 3. ADMIN BOOKING (Same as before)
 function loadAdminPanel() { updateAvailableTimeSlots(); loadScheduleList(); }
 document.getElementById('bookDay').addEventListener('change', () => { updateAvailableTimeSlots(); loadScheduleList(); });
 
@@ -156,7 +183,7 @@ function loadScheduleList() {
     });
 }
 
-// 4. MONITOR & HISTORY
+// 4. MONITOR (Same as before)
 document.getElementById('historyDate').addEventListener('change', loadScheduleForSelectedDate);
 function loadScheduleForSelectedDate() {
     const dateInput = document.getElementById('historyDate').value;
