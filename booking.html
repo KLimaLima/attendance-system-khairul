@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Schedule</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>📅 Schedule Manager</h1>
+        <div class="header-controls">
+            <a href="index.html" class="nav-btn" style="background:#6c757d;">⬅ Back to Monitor</a>
+            <button id="logoutBtn">Log Out</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 800px; margin: auto;">
+            <h2>Add / Remove Classes</h2>
+            <label>Select Day</label>
+            <select id="bookDay">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="0">Sunday</option>
+            </select>
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1"><label>Start Time</label><select id="bookTime"></select></div>
+                <div style="flex:1"><label>Duration (Hrs)</label><input type="number" id="bookDuration" value="2" min="1" max="4"></div>
+            </div>
+            <label>Subject</label>
+            <input type="text" id="bookName" placeholder="e.g. Circuit Design">
+            <button id="addClassBtn" style="background:#6610f2; color:white;">➕ Book Slot</button>
+            <hr>
+            <h4>Current Schedule:</h4>
+            <div id="bookingList">Loading...</div>
+        </div>
+    </div>
+
+    <script type="module" src="logic.js"></script>
+</body>
+</html>
