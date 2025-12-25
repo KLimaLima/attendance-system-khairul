@@ -44,14 +44,13 @@
             </div>
 
             <div class="card">
-                <h2>📡 RFID Simulator</h2>
-                <p><i>Simulate a student scanning their card.</i></p>
-                <label>Student Name</label>
-                <input type="text" id="simName" placeholder="e.g. Ali Bin Abu">
-                <label>Student ID</label>
-                <input type="text" id="simID" placeholder="e.g. SW01081335">
-                <button id="simBtn" style="background:#007bff; color:white;">📲 Simulate Scan</button>
-                <p id="simStatus" style="color:green; text-align:center; min-height:20px; margin-top:10px;"></p>
+                <h2>📡 Attendance Summary</h2>
+                <p>Total Students Enrolled</p>
+                <h3 id="total_student_text">Loading...</h3>
+                <p>Present (Scanned In)</p>
+                <h3 id="present_text" style="color: #28a745;">Loading...</h3>
+                <p>Absent</p>
+                <h3 id="absent_text" style="color: crimson;">Loading...</h3>
             </div>
 
         </div>
