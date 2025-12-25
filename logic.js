@@ -235,8 +235,9 @@ function loadAttendance(startHour, className, duration) {
             }
         });
         document.getElementById('count').innerText = count;
+        document.getElementById('total_student_text').innerText = rfids_in_this_course.length;
         document.getElementById('present_text').innerText = count;
-        document.getElementById('absent_text').innerText = 5 - count; //5 is total student
+        document.getElementById('absent_text').innerText = rfids_in_this_course.length - count;
     });
 }
 
